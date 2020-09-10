@@ -9,4 +9,8 @@ Nothing useful yet.
 
 File source, stdin, and inline mode.
 
+## Output modes
+
+All in memory and streaming mode.
+
 Note: The default branch (with special meaning for github and gitlab users) has the name default 😉
