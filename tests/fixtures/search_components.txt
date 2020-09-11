@@ -1,0 +1,17 @@
+$search=foo
+$search=foo bar
+$search=foo bar baz
+$search=foo AND bar
+$search=foo AND bar AND baz
+$search=foo OR bar
+$search=foo OR bar OR baz
+$search=NOT foo
+$search=foo NOT bar
+$search=foo NOT bar NOT baz
+$search=foo NOT bar baz
+$search=foo baz NOT bar
+$search="foo bar"
+$search="foo bar baz"
+$search=
+$search=(foo OR bar) AND NOT "baz zooka"
+$search=(foo OR bar) AND NOT "baz\"zooka\""
