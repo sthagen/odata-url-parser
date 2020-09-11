@@ -1,4 +1,5 @@
 addict
+antlr4-python3-runtime
 attrs
 black
 coverage
