@@ -1,0 +1,11 @@
+addict
+attrs
+black
+coverage
+ddt
+flake8
+hypothesis
+mypy
+pylint
+pyperf
+pytest
