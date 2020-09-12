@@ -1,9 +1,19 @@
-# python-odata_url_parser
+# odata-url-parser
 An experimental OData 4.01 URL parser. 
+
+:warning: This repository is transitioning to a poly language structure and will change the name to `odata-url-parser` soon
 
 ## What is ready?
 
 Nothing useful yet.
+
+## Source "Language"
+
+ABNF and Antlr4.
+
+## Target languages
+
+C++, Dart, Go, Java, Javasript, Python, and Typescript.
 
 ## Input modes
 
