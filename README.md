@@ -1,7 +1,7 @@
 # odata-url-parser
 An experimental OData 4.01 URL parser. 
 
-:warning: This repository is transitioning to a poly language structure and will change the name to `odata-url-parser` soon
+🔔 This repository exposes a poly language structure and thus the name is now `odata-url-parser`
 
 ## What is ready?
 
