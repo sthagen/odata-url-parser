@@ -11,6 +11,9 @@
 # Output of the go coverage tool, specifically when used with LiteIDE
 *.out
 
+# Publishing go.sum is maybe not (yet) a good idea
+go.sum
+
 .idea
 
 # Dependency directories (remove the comment below to include it)
