@@ -1,0 +1,263 @@
+--- odata-abnf-testcases-v4.01-os-20200423.xml	2020-09-11 20:10:12.000000000 +0200
++++ odata-abnf-testcases-v4.01-os-20200423-fixed-ampersands.xml	2020-09-12 15:33:10.000000000 +0200
+@@ -1,70 +1,4 @@
+-<!-- 
+-     OData Version 4.01
+-     OASIS Standard
+-     23 April 2020
+-     Copyright (c) OASIS Open 2020. All Rights Reserved.
+-     Source: https://docs.oasis-open.org/odata/odata/v4.01/os/abnf/
+-     Latest version of narrative specification: https://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html
+-     TC IPR Statement: https://www.oasis-open.org/committees/odata/ipr.php
+-  OData ABNF Test Cases Version 4.01 and 4.0
+-  05 November 2019
+-  Technical Committee:
+-  OASIS Open Data Protocol (OData) TC
+-  https://www.oasis-open.org/committees/odata
+-  Chairs:
+-  - Ralf Handl (ralf.handl@sap.com), SAP SE
+-  - Michael Pizzo (mikep@microsoft.com), Microsoft
+-  Editors:
+-  - Ralf Handl (ralf.handl@sap.com), SAP SE
+-  - Michael Pizzo (mikep@microsoft.com), Microsoft
+-  - Martin Zurmuehl (martin.zurmuehl@sap.com), SAP SE
+-  Additional artifacts:
+-  This test case document is one component of a Work Product which consists of:
+-  - OData Version 4.01 Part 1: Protocol
+-  - OData Version 4.01 Part 2: URL Conventions
+-  - OData ABNF Construction Rules Version 4.01
+-  - OData ABNF Test Cases Version 4.01 (this document)
+-  Related work:
+-  This specification replaces or supersedes:
+-  - OData ABNF Test Cases Version 4.0
+-  This work product is related to
+-  - OData Common Schema Definition Language (CSDL) JSON Representation Version 4.01
+-  - OData Common Schema Definition Language (CSDL) XML Representation Version 4.01
+-  - OData JSON Format Version 4.01
+-  Abstract:
+-  The Open Data Protocol (OData) enables the creation of REST-based data
+-  services, which allow resources, identified using Uniform Resource
+-  Identifiers (URLs) and defined in a data model, to be published and
+-  edited by Web clients using simple HTTP messages. This document defines
+-  the URL syntax for requests and the serialization format for primitive
+-  literals in request and response payloads.
+-  Overview:
+-  This document contains positive and negative test cases for the
+-  OData ABNF Construction Rules Version 4.01.
+-  Positive test cases consist of the rule to test, the input string to parse,
+-  and a description of the test case, often starting with a section number
+-  referring to OData Version 4.01 Part 2: URL Conventions.
+-  Negative test cases in addition state the character position at which the
+-  invalid portion of input text starts, 0 meaning the whole input string.
+-  These test cases can be automatically executed with the ABNF test tool
+-  available at https://github.com/SAP/abnf-test-tool.
+-  This tool is neither required for interpreting the test cases, nor is it
+-  part of the OData work product.
+- -->
+-<TestSuite xmlns="http://docs.oasis-open.org/odata/ns/testcases" MaxUncoveredRules="80">
+-<!-- 
+-    This document contains positive and negative test cases for the
+-    OData ABNF Construction Rules Version 4.01.
+-    Positive test cases consist of the rule to test, the input string to parse,
+-    and a description of the test case, often starting with a section number
+-    referring to OData Version 4.01 Part 2: URL Conventions.
+-    Negative test cases in addition state the character position at which the
+-    invalid portion of input text starts, 0 meaning the whole input string.
+-    These test cases can be automatically executed with the ABNF test tool
+-    available at https://github.com/SAP/abnf-test-tool.
+-    This tool is neither required for interpreting the test cases, nor is it
+-    part of the OData work product.
+-   -->
++<TestSuite xmlns="https://github.com/sthagen/odata-url-parser/py/tests/fixtures" MaxUncoveredRules="80">
+ <DisableTrace Rule="odataIdentifier"/>
+ <DisableTrace Rule="identifierLeadingCharacter"/>
+ <DisableTrace Rule="identifierCharacter"/>
+@@ -568,7 +502,7 @@
+ <Input>null</Input>
+ </TestCase>
+ <TestCase Name="String" Rule="string">
+-<Input>'ABCDEFGHIHJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~!$&('')*+,;=:@'</Input>
++<Input>'ABCDEFGHIHJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~!$&amp;('')*+,;=:@'</Input>
+ </TestCase>
+ <TestCase Name="String" Rule="string">
+ <Input>'O''Neil'</Input>
+@@ -700,10 +634,10 @@
+ <Input>Categories(ID=@key)?@key=1</Input>
+ </TestCase>
+ <TestCase Name="2 URL Components - query options" Rule="queryOptions">
+-<Input>$top=2&$orderby=Name</Input>
++<Input>$top=2&amp;$orderby=Name</Input>
+ </TestCase>
+ <TestCase Name="2 URL Components - resource path and query options" Rule="odataRelativeUri">
+-<Input>Categories(1)/Products?$top=2&$orderby=Name</Input>
++<Input>Categories(1)/Products?$top=2&amp;$orderby=Name</Input>
+ </TestCase>
+ <TestCase Name="2 URL Components - single quotes" Rule="odataRelativeUri">
+ <Input>Customers('O''Neil')</Input>
+@@ -736,7 +670,7 @@
+ <Input>http://services.odata.org/OData/OData.svc/$metadata?$format=text/html</Input>
+ </TestCase>
+ <TestCase Name="4.1 - Metadata URL - allowed" Rule="odataUri">
+-<Input>http://services.odata.org/OData/OData.svc/$metadata?$format=text/html&!special</Input>
++<Input>http://services.odata.org/OData/OData.svc/$metadata?$format=text/html&amp;!special</Input>
+ </TestCase>
+ <TestCase Name="4.2 - Batch URL" Rule="odataUri">
+ <Input>http://services.odata.org/OData/OData.svc/$batch</Input>
+@@ -889,10 +823,10 @@
+ <Input>$entity?id=urn:some:id</Input>
+ </TestCase>
+ <TestCase Name="4.3.4 $entity with OData URL, $select and $expand fails without type-cast" Rule="odataRelativeUri" FailAt="48">
+-<Input>$entity?$id=http://myservice/Customers('ALFKI')&$select=CompanyName,ContactName&$expand=Orders</Input>
++<Input>$entity?$id=http://myservice/Customers('ALFKI')&amp;$select=CompanyName,ContactName&amp;$expand=Orders</Input>
+ </TestCase>
+ <TestCase Name="4.3.4 $entity with OData URL, $select and $expand" Rule="odataRelativeUri">
+-<Input>$entity/Model.Customer?$id=http://myservice/Customers('ALFKI')&$select=CompanyName,ContactName&$expand=Orders</Input>
++    <Input>$entity/Model.Customer?$id=http://myservice/Customers('ALFKI')&amp;$select=CompanyName,ContactName&amp;$expand=Orders</Input>
+ </TestCase>
+ <TestCase Name="4.3.4 $entity without $id fails" Rule="odataRelativeUri" FailAt="20">
+ <Input>$entity?$format=json</Input>
+@@ -1165,25 +1099,25 @@
+ <Input>Products/$filter(Age gt 3)</Input>
+ </TestCase>
+ <TestCase Name="4.12 Filter Path Segment - multiple" Rule="odataRelativeUri">
+-<Input>Products/$filter(@foo)/$filter(@bar)?@foo=Age gt 3&@bar=Price lt 5</Input>
++    <Input>Products/$filter(@foo)/$filter(@bar)?@foo=Age gt 3&amp;@bar=Price lt 5</Input>
+ </TestCase>
+ <TestCase Name="4.12 Filter Path Segment - multiple" Rule="odataRelativeUri">
+ <Input>Products/$filter(Age gt 3)/$filter(Price lt 5)</Input>
+ </TestCase>
+ <TestCase Name="4.12 Filter Path Segment - with /$ref" Rule="odataRelativeUri">
+-<Input>Products/$filter(@foo)/$filter(@bar)/$ref?@foo=Age gt 3&@bar=Price lt 5</Input>
++    <Input>Products/$filter(@foo)/$filter(@bar)/$ref?@foo=Age gt 3&amp;@bar=Price lt 5</Input>
+ </TestCase>
+ <TestCase Name="4.12 Filter Path Segment - with /$count" Rule="odataRelativeUri">
+-<Input>Products/$filter(@foo)/$filter(@bar)/$count?@foo=Age gt 3&@bar=Price lt 5</Input>
++    <Input>Products/$filter(@foo)/$filter(@bar)/$count?@foo=Age gt 3&amp;@bar=Price lt 5</Input>
+ </TestCase>
+ <TestCase Name="4.12 Filter Path Segment - with /$count and $filter query option" Rule="odataRelativeUri">
+-<Input>Products/$filter(@foo)/$filter(@bar)/$count?@foo=Age gt 3&@bar=Price lt 5&$filter=Price lt 6</Input>
++    <Input>Products/$filter(@foo)/$filter(@bar)/$count?@foo=Age gt 3&amp;@bar=Price lt 5&amp;$filter=Price lt 6</Input>
+ </TestCase>
+ <TestCase Name="4.12 Filter Path Segment - multiple" Rule="odataRelativeUri">
+-<Input>Products/$filter(@foo)/Special.ProductsByColor(color='red')/$filter(@bar)?@foo=Age gt 3&@bar=Price lt 5</Input>
++    <Input>Products/$filter(@foo)/Special.ProductsByColor(color='red')/$filter(@bar)?@foo=Age gt 3&amp;@bar=Price lt 5</Input>
+ </TestCase>
+ <TestCase Name="4.12 Filter Path Segment - multiple, no namespace" Rule="odataRelativeUri">
+-<Input>Products/$filter(@foo)/ProductsByColor(color='red')/$filter(@bar)?@foo=Age gt 3&@bar=Price lt 5</Input>
++    <Input>Products/$filter(@foo)/ProductsByColor(color='red')/$filter(@bar)?@foo=Age gt 3&amp;@bar=Price lt 5</Input>
+ </TestCase>
+ <TestCase Name="4.12 Filter Path Segment - with action" Rule="odataRelativeUri">
+ <Input>Products/$filter(@foo)/Special.Cluster?@foo=Age gt 3</Input>
+@@ -1204,7 +1138,7 @@
+ <Input>Categories(1)/$value</Input>
+ </TestCase>
+ <TestCase Name="4.15 - Cross Join" Rule="odataRelativeUri">
+-<Input>$crossjoin(Customers,Countries)?$expand=Customers($select=Name),Countries($select=Name)&$filter=Customers/CountryCode eq Countries/CountryCode and Countries/Name eq 'USA'</Input>
++    <Input>$crossjoin(Customers,Countries)?$expand=Customers($select=Name),Countries($select=Name)&amp;$filter=Customers/CountryCode eq Countries/CountryCode and Countries/Name eq 'USA'</Input>
+ </TestCase>
+ <TestCase Name="4.16 Addressing All Entities in a Service" Rule="odataRelativeUri">
+ <Input>$all?$search=red</Input>
+@@ -1720,7 +1654,7 @@
+ <Input>$filter=endswith($it,'.com')</Input>
+ </TestCase>
+ <TestCase Name="5.1.1.14.4 $it with alias for entity reference" Rule="queryOptions">
+-<Input>$filter=$it eq @ref&@ref={"@odata.id":"http://host/service/ZqV5t"}</Input>
++    <Input>$filter=$it eq @ref&amp;@ref={"@odata.id":"http://host/service/ZqV5t"}</Input>
+ </TestCase>
+ <TestCase Name="5.1.1.14.4 $it with entity reference" Rule="queryOptions">
+ <Input>$filter=$it eq {"@odata.id":"http://host/service/ZqV5t"}</Input>
+@@ -1774,7 +1708,7 @@
+ <Input>$compute=@Core.Messages as CoreMessages</Input>
+ </TestCase>
+ <TestCase Name="5.1.1.16 Annotation Values" Rule="queryOptions">
+-<Input>$compute=@Core.Messages as _at_Core_dot_Messages&$select=_at_Core_dot_Messages($top=5)</Input>
++    <Input>$compute=@Core.Messages as _at_Core_dot_Messages&amp;$select=_at_Core_dot_Messages($top=5)</Input>
+ </TestCase>
+ <TestCase Name="5.1.1.16 Annotation Values" Rule="filter">
+ <Input>$filter=@Messages/any(m:m/severity eq 'error')</Input>
+@@ -1930,7 +1864,7 @@
+ <Input>$select=Address($select=Street,City,Namespace.AddressWithLocation/Location)</Input>
+ </TestCase>
+ <TestCase Name="5.1.3 Select - nested filter etc." Rule="queryOptions">
+-<Input>$select=Addresses($filter=startswith(City,'H');$top=5;$skip=0;$count=true;$orderby=$it;$search=blue;@c=15)&$expand=Addresses/Country</Input>
++    <Input>$select=Addresses($filter=startswith(City,'H');$top=5;$skip=0;$count=true;$orderby=$it;$search=blue;@c=15)&amp;$expand=Addresses/Country</Input>
+ </TestCase>
+ <TestCase Name="5.1.3 Select - annotations" Rule="select">
+ <Input>$select=@Core.Messages($top=5)</Input>
+@@ -1960,10 +1894,10 @@
+ <Input>$orderby=Cost ge Revenue asc</Input>
+ </TestCase>
+ <TestCase Name="5.1.5 Top and Skip" Rule="queryOptions">
+-<Input>$top=5&$skip=10</Input>
++    <Input>$top=5&amp;$skip=10</Input>
+ </TestCase>
+ <TestCase Name="5.1.5 Top and Skip - $ is optional" Rule="queryOptions">
+-<Input>top=5&skip=10</Input>
++    <Input>top=5&amp;skip=10</Input>
+ </TestCase>
+ <TestCase Name="5.1.6 Inlinecount" Rule="queryOptions">
+ <Input>$count=true</Input>
+@@ -2014,7 +1948,7 @@
+ <Input>$search=%231</Input>
+ </TestCase>
+ <TestCase Name="5.1.7 Search - simple term with unencoded ampersand" Rule="queryOptions" FailAt="17">
+-<Input>$search=more&more</Input>
++    <Input>$search=more&amp;more</Input>
+ </TestCase>
+ <TestCase Name="5.1.7 Search - simple term with percent-encoded ampersand" Rule="queryOptions">
+ <Input>$search=more%26more</Input>
+@@ -2152,13 +2086,13 @@
+ <Input>http://serviceRoot/$all?$search=blue</Input>
+ </TestCase>
+ <TestCase Name="5.1.8 Format" Rule="queryOptions">
+-<Input>$format=json&$Format=atom&$format=xml&$format=text/html</Input>
++    <Input>$format=json&amp;$Format=atom&amp;$format=xml&amp;$format=text/html</Input>
+ </TestCase>
+ <TestCase Name="5.1.8 Format - $ is optional" Rule="queryOptions">
+ <Input>format=json</Input>
+ </TestCase>
+ <TestCase Name="5.1.8 Format - value is case-insensitive" Rule="queryOptions">
+-<Input>$format=JSON&$format=Atom&$format=XML&$format=text/html</Input>
++    <Input>$format=JSON&amp;$format=Atom&amp;$format=XML&amp;$format=text/html</Input>
+ </TestCase>
+ <TestCase Name="5.1.8 Format - media type" Rule="queryOptions">
+ <Input>$format=text/html</Input>
+@@ -2191,7 +2125,7 @@
+ <Input>$skiptoken=Start@Next_Chunk:From?=Here!</Input>
+ </TestCase>
+ <TestCase Name="Next Link: no Ampersand" Rule="skiptoken" FailAt="14">
+-<Input>$skiptoken=Not&this</Input>
++    <Input>$skiptoken=Not&amp;this</Input>
+ </TestCase>
+ <TestCase Name="5.2 Custom Query Option" Rule="customQueryOption">
+ <Input>find=O%27Neil</Input>
+@@ -2203,16 +2137,16 @@
+ <Input>!special</Input>
+ </TestCase>
+ <TestCase Name="5.2 Custom Query Option" Rule="queryOptions">
+-<Input>find=O%27Neil&!special</Input>
++    <Input>find=O%27Neil&amp;!special</Input>
+ </TestCase>
+ <TestCase Name="5.2 Custom Query Option" Rule="queryOptions">
+-<Input>$orderby=Name&!deltatoken=0412312321</Input>
++    <Input>$orderby=Name&amp;!deltatoken=0412312321</Input>
+ </TestCase>
+ <TestCase Name="5.3 Parameter Aliases" Rule="queryOptions">
+-<Input>$filter=contains(Title,@word)&@word='Black'</Input>
++    <Input>$filter=contains(Title,@word)&amp;@word='Black'</Input>
+ </TestCase>
+ <TestCase Name="5.3 Parameter Aliases" Rule="queryOptions">
+-<Input>$filter=Title eq @title&@title='Wizard%20of%20Oz'</Input>
++    <Input>$filter=Title eq @title&amp;@title='Wizard%20of%20Oz'</Input>
+ </TestCase>
+ <TestCase Name="5.3 Parameter Aliases" Rule="odataRelativeUri">
+ <Input>Products/Model.WithIngredients(Ingredients=@i)?@i=["Carrots","Ginger","Oranges"]</Input>
+@@ -2481,7 +2415,7 @@
+ <Input>EmailAddresses eq ('Miller','Smith')</Input>
+ </TestCase>
+ <TestCase Name="Functions in filter - alias as parameter" Rule="queryOptions">
+-<Input>$filter=Model.PhoneticallySimilar(Word=@expression)&@expression=5 add 3</Input>
++    <Input>$filter=Model.PhoneticallySimilar(Word=@expression)&amp;@expression=5 add 3</Input>
+ </TestCase>
+ <TestCase Name="Functions in filter - expression as parameter" Rule="queryOptions">
+ <Input>$filter=Model.PhoneticallySimilar(Number=5 add 3)</Input>
