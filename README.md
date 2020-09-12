@@ -3,6 +3,10 @@ An experimental OData 4.01 URL parser.
 
 🔔 This repository exposes a poly language structure and thus the name is now `odata-url-parser`
 
+## Scope
+
+For initial scope definition cf. [Scope wiki page](https://github.com/sthagen/odata-url-parser/wiki/Scope)
+
 ## What is ready?
 
 Nothing useful yet.
