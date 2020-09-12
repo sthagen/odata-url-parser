@@ -1,0 +1,30 @@
+{
+  "name": "odata-url-parser",
+  "version": "2020.9.12",
+  "description": "An experimental OData 4.01 URL parser.",
+  "main": "index.js",
+  "module": "main.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sthagen/odata-url-parser.git"
+  },
+  "keywords": [
+    "odatav4",
+    "url-parser"
+  ],
+  "author": "Stefan Hagen <stefan@dilettant.eu> (https://stefan-hagen.website)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sthagen/odata-url-parser/issues"
+  },
+  "homepage": "https://github.com/sthagen/odata-url-parser#readme",
+  "dependencies": {
+    "esm": "^3.2.25"
+  },
+  "devDependencies": {
+    "jest": "^26.4.2"
+  }
+}
