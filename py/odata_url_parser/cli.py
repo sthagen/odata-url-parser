@@ -15,3 +15,5 @@ def main(argv=None, inline_mode=False, streaming_mode=False):
     """Process ... TODO."""
     argv = argv if argv else sys.argv[1:]
     DEBUG and print(f"Arguments after hand over: ({argv})")
+    for text in argv:
+        print(oup.parse(text))

@@ -9,7 +9,7 @@ import odata_url_parser.odata_url_parser as oup
 
 def test_main_ok_minimal(capsys):
     job = ['does not matter']
-    report_expected = ''
+    report_expected = job[0]
     assert cli.main(job) is None
     out, err = capsys.readouterr()
     assert out.strip() == report_expected.strip()
