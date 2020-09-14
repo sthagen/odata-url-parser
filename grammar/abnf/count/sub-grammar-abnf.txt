@@ -1,0 +1,7 @@
+queryOptions = queryOption *( "&" queryOption )
+queryOption  = inlinecount
+
+inlinecount = ( "$count" / "count" ) EQ booleanValue
+
+booleanValue = "true" / "false"
+EQ     = "="
