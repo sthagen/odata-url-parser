@@ -1,0 +1,7 @@
+queryOptions = queryOption *( "&" queryOption )
+queryOption  = index
+
+index  = ( "$index" / "index" ) EQ 1*DIGIT
+
+EQ     = "="
+DIGIT  = %x30-39
