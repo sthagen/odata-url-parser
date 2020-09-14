@@ -1,0 +1,9 @@
+queryOptions = queryOption *( "&" queryOption )
+queryOption  = skip
+             / top
+
+skip = ( "$skip" / "skip" ) EQ 1*DIGIT
+top  = ( "$top"  / "top"  ) EQ 1*DIGIT
+
+EQ     = "="
+DIGIT  = %x30-39
