@@ -1,0 +1,1 @@
+_={ 	"\t\b" :"\n"  ,"=":CaSt('P'	,Edm.Decimal)	Sub  		 ISoF(Collection(Edm.GeometryMultiPolygon) )	 in				(68005-09-05	)    	 in  ( 	 	6006-07-13T21:21z)		  	,"":"\"", "/\r'":	"" 	  , "" :"[] \\!"	}
