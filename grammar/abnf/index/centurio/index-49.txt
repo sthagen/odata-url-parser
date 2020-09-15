@@ -1,1 +1,1 @@
-INdEX=0
+$InDEX=1
