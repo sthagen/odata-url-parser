@@ -17,7 +17,7 @@ ABNF and Antlr4.
 
 ## Target languages
 
-C++, Dart, Go, Java, Javasript, Python, and Typescript.
+C++, Dart, Go, Java, Javascript, Python, and Typescript.
 
 ## Input modes
 
