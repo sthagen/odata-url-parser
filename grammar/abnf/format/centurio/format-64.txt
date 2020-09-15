@@ -1,1 +1,1 @@
-forMat=jSoN
+$forMAt=$@&-m:/:

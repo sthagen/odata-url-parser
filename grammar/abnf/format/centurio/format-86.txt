@@ -1,1 +1,1 @@
-$fOrMat=JsON
+format=jsOn

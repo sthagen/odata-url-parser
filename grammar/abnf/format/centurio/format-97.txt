@@ -1,1 +1,1 @@
-$fORMAT=aTOm
+foRMat=o/8

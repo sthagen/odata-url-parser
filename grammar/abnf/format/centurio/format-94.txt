@@ -1,1 +1,1 @@
-$FORMAT=AtOm
+FoRmat=:/'@

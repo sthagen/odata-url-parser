@@ -1,1 +1,1 @@
-fORmaT=AtOM
+$ForMat=xmL

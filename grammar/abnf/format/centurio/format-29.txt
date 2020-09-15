@@ -1,1 +1,1 @@
-foRmaT=ATOm
+ForMaT=JSoN

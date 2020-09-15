@@ -1,1 +1,1 @@
-$formAT=Atom
+foRmAT=atOm

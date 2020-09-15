@@ -1,1 +1,1 @@
-FORmaT=XML
+fORMaT=atom

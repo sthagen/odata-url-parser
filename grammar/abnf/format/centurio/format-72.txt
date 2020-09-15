@@ -1,1 +1,1 @@
-$FOrMAt=XmL
+forMaT=XmL

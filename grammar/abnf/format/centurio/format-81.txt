@@ -1,1 +1,1 @@
-$fORmAt=jsoN
+$FORMat=Xml

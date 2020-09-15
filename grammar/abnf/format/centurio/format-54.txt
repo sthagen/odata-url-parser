@@ -1,1 +1,1 @@
-$FormAt=;~/4
+$FORMat=AtoM

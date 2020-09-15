@@ -1,1 +1,1 @@
-FOrmat=yt/ch
+fORmAt=NuP/PX

@@ -1,1 +1,1 @@
-FOrmaT=JsOn
+fORmAT=json

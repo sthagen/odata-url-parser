@@ -1,1 +1,1 @@
-forMAT=xml
+$FoRMAt=atOM

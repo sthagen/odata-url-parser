@@ -1,1 +1,1 @@
-fORmAt=:=/@:
+$FORMAT=xml

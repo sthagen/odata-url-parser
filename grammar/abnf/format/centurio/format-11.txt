@@ -1,1 +1,1 @@
-foRmaT=1/2f
+$foRMAT=Ejag3/12s

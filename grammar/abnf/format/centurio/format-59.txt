@@ -1,1 +1,1 @@
-forMAT=JSON
+$foRMAT=XmL

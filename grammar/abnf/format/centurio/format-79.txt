@@ -1,1 +1,1 @@
-foRmat=xmL
+foRMaT=Xml

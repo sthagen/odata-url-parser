@@ -1,1 +1,1 @@
-$foRMAT=JsoN
+formaT=jsON

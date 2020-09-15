@@ -1,1 +1,1 @@
-fORMaT=xMl
+FoRMAt=jSON

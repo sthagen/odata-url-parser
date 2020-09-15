@@ -1,1 +1,1 @@
-fORMAt=~~/_
+$fORMAT=JSoN

@@ -1,1 +1,1 @@
-$fOrmat=AtOM
+FoRMaT=&/)

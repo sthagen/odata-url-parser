@@ -1,1 +1,1 @@
-FoRMAt=:@:/-
+formAt=atOM

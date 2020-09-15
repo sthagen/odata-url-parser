@@ -1,1 +1,1 @@
-$foRMat=Xml
+$forMaT=JSON

@@ -1,1 +1,1 @@
-formAt=xml
+ForMat=Atom

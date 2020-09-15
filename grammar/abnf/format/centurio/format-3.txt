@@ -1,1 +1,1 @@
-FORMAT=ATOM
+$format=json

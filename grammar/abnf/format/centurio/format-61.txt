@@ -1,1 +1,1 @@
-$FoRmAT=xMl
+$fORMAt=xMl

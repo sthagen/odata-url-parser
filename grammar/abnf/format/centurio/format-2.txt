@@ -1,1 +1,1 @@
-$FORMAT=;/:
+$FORMAT=atom

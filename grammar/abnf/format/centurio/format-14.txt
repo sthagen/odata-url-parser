@@ -1,1 +1,1 @@
-fORMaT=BDS/sLm
+FOrMAt=k/T

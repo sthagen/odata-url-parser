@@ -1,1 +1,1 @@
-fORmAT=@/+@
+$fOrMAt=JSoN

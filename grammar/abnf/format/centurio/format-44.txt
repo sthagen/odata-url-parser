@@ -1,1 +1,1 @@
-fORmAt=Json
+FOrMat=XML
