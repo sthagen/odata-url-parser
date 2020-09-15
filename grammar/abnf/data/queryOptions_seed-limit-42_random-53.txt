@@ -1,1 +1,1 @@
-COMPUTE=iSOF( u)		 HAS '-9,-616,L,30,d8,-69,g3'	As	 	V
+,
