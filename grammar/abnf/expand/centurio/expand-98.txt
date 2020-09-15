@@ -1,1 +1,1 @@
-ExPAnD=pP/_,_
+eXPanD=$vALUE,$valUE,$ValUE

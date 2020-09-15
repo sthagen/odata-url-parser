@@ -1,1 +1,1 @@
-$ExpanD=@_3.__#E_4/Z_j
+$expAND=$VaLuE

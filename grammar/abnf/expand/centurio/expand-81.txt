@@ -1,1 +1,1 @@
-$EXPAnd=$Value
+$eXpAND=$VALUE,$VaLUe,$VaLUE

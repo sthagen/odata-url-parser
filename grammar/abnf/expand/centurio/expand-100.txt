@@ -1,1 +1,1 @@
-ExpAND=$vAlUe
+exPAnD=*

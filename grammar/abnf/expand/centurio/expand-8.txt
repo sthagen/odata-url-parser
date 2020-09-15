@@ -1,1 +1,1 @@
-eXPAND=*
+expAND=J/*

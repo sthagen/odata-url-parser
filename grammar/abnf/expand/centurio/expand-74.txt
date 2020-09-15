@@ -1,1 +1,1 @@
-$expAND=*($lEVElS=MaX),_nV/*(LEVeLS=7),_bO/@U.d._6#_/J/n(@n_=[ 	 		];$LEVeLs=max;$LEvElS=Max),$ValUE
+$ExPAnd=$ValuE

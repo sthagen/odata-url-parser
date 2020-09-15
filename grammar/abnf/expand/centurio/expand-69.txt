@@ -1,1 +1,1 @@
-ExPanD=_/_7t/_n_fOSD_/*
+eXpAND=$VaLuE
