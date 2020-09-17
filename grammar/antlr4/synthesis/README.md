@@ -1,6 +1,6 @@
 # Prototyping (status)
 
-The synthetic grammars for count, index, skip, and top pass all positive "centurio" test cases generated from the ABNF sub grammars.
+The synthetic grammars for `count`, `index`, `skip` and `top` pass all positive "centurio" test cases generated from the ABNF sub grammars.
 
 ## Setup:
 ```bash
