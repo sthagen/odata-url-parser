@@ -39,9 +39,9 @@ commonexpr : ( primitiveliteral
              )?
              ;
 
-// boolCommonExpr = commonExpr ; resulting in a Boolean
+boolcommonexpr : commonexpr; // resulting in a Boolean
 
-rootexpr : '$root/' ( entitySetName keyPredicate | singletonEntity ) ( singleNavigationExpr )?;
+rootexpr : '$root/' ( entitysetname keypredicate | singletonentity ) ( singlenavigationexpr )?;
 
 firstmemberexpr : memberexpr
                 | inscopevariableexpr ( '/' memberexpr )?;
@@ -244,8 +244,200 @@ notexpr : Not RWS boolcommonexpr;
 isofexpr : Isof OPEN BWS ( commonexpr BWS COMMA BWS )? optionallyqualifiedtypename BWS CLOSE;
 castexpr : Cast OPEN BWS ( commonexpr BWS COMMA BWS )? optionallyqualifiedtypename BWS CLOSE;
 
+// From ABNF section JSON format for queries
+// Note: the query part of a URI needs to be percent-encoding normalized before
+//       applying these rules, see comment at the top of this file
+
+arrayorobject : array
+              | object
+              ;
+
+array : beginarray
+        ( valueinurl ( valueseparator valueinurl )* )?
+        endarray
+        ;
+
+object : beginobject
+         ( member ( valueseparator member )* )?
+         endobject
+         ;
+
+member : stringinurl nameseparator valueinurl;
+
+valueinurl : stringinurl
+           | commonexpr
+           ;
+
+// JSON syntax: adapted to URI restrictions from [RFC8259]
+beginobject : BWS  '{'  BWS;
+endobject   : BWS  '}';
+
+beginarray : BWS  '['  BWS;
+endarray   : BWS  ']';
+
+quotationmark  : DQUOTE;
+nameseparator  : BWS COLON BWS;
+valueseparator : BWS COMMA BWS;
+
+stringinurl : quotationmark charinjson* quotationmark;
+
+charinjson   : Qcharunescaped
+             | qcharjsonspecial
+             | escape ( quotationmark
+                      | escape
+                      | '/' // solidus         U+002F - literal form is allowed in the query part of a URL
+                      | 'b'             // backspace       U+0008
+                      | 'f'             // form feed       U+000C
+                      | 'n'             // line feed       U+000A
+                      | 'r'             // carriage return U+000D
+                      | 't'             // tab             U+0009
+                      | 'u' Hexdigit4   //                 U+XXXX
+                      )
+             ;
+qcharjsonspecial : SP | ':' | '{' | '}' | '[' | ']'; // some agents put these unencoded into the query part of a URL
+
+escape : '\\';      // reverse solidus U+005C
+
 
 // From ABNF section Names and identifiers
+
+qualifiedtypename : singlequalifiedtypename
+                  | 'Collection' OPEN singlequalifiedtypename CLOSE
+                  ;
+
+optionallyqualifiedtypename : singlequalifiedtypename
+                            | 'Collection' OPEN singlequalifiedtypename CLOSE
+                            | singletypename
+                            | 'Collection' OPEN singletypename CLOSE
+                            ;
+
+singlequalifiedtypename : qualifiedentitytypename
+                        | qualifiedcomplextypename
+                        | qualifiedtypedefinitionname
+                        | qualifiedenumtypename
+                        | primitivetypename
+                        ;
+
+singletypename : entitytypename
+               | complextypename
+               | typedefinitionname
+               | enumerationtypename
+               ;
+
+qualifiedentitytypename     : namespace '.' entitytypename;
+qualifiedcomplextypename    : namespace '.' complextypename;
+qualifiedtypedefinitionname : namespace '.' typedefinitionname;
+qualifiedenumtypename       : namespace '.' enumerationtypename;
+
+optionallyqualifiedentitytypename     : ( namespace '.' )? entitytypename;
+optionallyqualifiedcomplextypename    : ( namespace '.' )? complextypename;
+
+// an alias is just a single-part namespace
+namespace     : namespacepart ( '.' namespacepart )*;
+namespacepart : odataidentifier;
+
+entitysetname       : odataidentifier;
+singletonentity     : odataidentifier;
+entitytypename      : odataidentifier;
+complextypename     : odataidentifier;
+typedefinitionname  : odataidentifier;
+enumerationtypename : odataidentifier;
+enumerationmember   : odataidentifier;
+termname            : odataidentifier;
+
+// Note: this pattern is overly restrictive, the normative definition is type TSimpleIdentifier in OData EDM XML Schema
+odataidentifier             : Identifierleadingcharacter Identifiercharacter127*;
+Identifiercharacter127      : Idch
+                            (Idch (Idch (Idch (Idch (Idch (Idch Idch?)?)?)??)?)??)?
+                            (Idch (Idch (Idch (Idch (Idch (Idch (Idch Idch?)?)?)??)?)??)?)?
+                            (Idch (Idch (Idch (Idch (Idch (Idch (Idch Idch?)?)?)??)?)??)?)?
+                            (Idch (Idch (Idch (Idch (Idch (Idch (Idch Idch?)?)?)??)?)??)?)?
+                            (Idch (Idch (Idch (Idch (Idch (Idch (Idch Idch?)?)?)??)?)??)?)?
+                            (Idch (Idch (Idch (Idch (Idch (Idch (Idch Idch?)?)?)??)?)??)?)?
+                            (Idch (Idch (Idch (Idch (Idch (Idch (Idch Idch?)?)?)??)?)??)?)?
+                            (Idch (Idch (Idch (Idch (Idch (Idch (Idch Idch?)?)?)??)?)??)?)?
+                            (Idch (Idch (Idch (Idch (Idch (Idch (Idch Idch?)?)?)??)?)??)?)?
+                            (Idch (Idch (Idch (Idch (Idch (Idch (Idch Idch?)?)?)??)?)??)?)?
+                            (Idch (Idch (Idch (Idch (Idch (Idch (Idch Idch?)?)?)??)?)??)?)?
+                            (Idch (Idch (Idch (Idch (Idch (Idch (Idch Idch?)?)?)??)?)??)?)?
+                            (Idch (Idch (Idch (Idch (Idch (Idch (Idch Idch?)?)?)??)?)??)?)?
+                            (Idch (Idch (Idch (Idch (Idch (Idch (Idch Idch?)?)?)??)?)??)?)?
+                            (Idch (Idch (Idch (Idch (Idch (Idch (Idch Idch?)?)?)??)?)??)?)?
+                            (Idch (Idch (Idch (Idch (Idch (Idch (Idch Idch?)?)?)??)?)??)?)?
+                            ;
+
+Idch         : Identifierleadingcharacter | Digit; // plus Unicode characters from the categories L, Nl, Nd, Mn, Mc, Pc, or Cf
+Identifierleadingcharacter  : Alpha | '_';         // plus Unicode characters from the categories L or Nl
+
+primitivetypename : 'Edm.' ( 'Binary'
+                           | 'Boolean'
+                           | 'Byte'
+                           | 'Date'
+                           | 'DateTimeOffset'
+                           | 'Decimal'
+                           | 'Double'
+                           | 'Duration'
+                           | 'Guid'
+                           | 'Int16'
+                           | 'Int32'
+                           | 'Int64'
+                           | 'SByte'
+                           | 'Single'
+                           | 'Stream'
+                           | 'String'
+                           | 'TimeOfDay'
+                           | abstractspatialtypename ( concretespatialtypename )?
+                           )
+                           ;
+abstractspatialtypename : 'Geography'
+                        | 'Geometry'
+                        ;
+concretespatialtypename : 'Collection'
+                        | 'LineString'
+                        | 'MultiLineString'
+                        | 'MultiPoint'
+                        | 'MultiPolygon'
+                        | 'Point'
+                        | 'Polygon'
+                        ;
+
+primitiveproperty       : primitivekeyproperty | primitivenonkeyproperty;
+primitivekeyproperty    : odataidentifier;
+primitivenonkeyproperty : odataidentifier;
+primitivecolproperty    : odataidentifier;
+complexproperty         : odataidentifier;
+complexcolproperty      : odataidentifier;
+streamproperty          : odataidentifier;
+
+navigationproperty          : entitynavigationproperty | entitycolnavigationproperty;
+entitynavigationproperty    : odataidentifier;
+entitycolnavigationproperty : odataidentifier;
+
+action       : odataidentifier;
+actionimport : odataidentifier;
+
+function : entityfunction
+         | entitycolfunction
+         | complexfunction
+         | complexcolfunction
+         | primitivefunction
+         | primitivecolfunction
+         ;
+
+entityfunction       : odataidentifier;
+entitycolfunction    : odataidentifier;
+complexfunction      : odataidentifier;
+complexcolfunction   : odataidentifier;
+primitivefunction    : odataidentifier;
+primitivecolfunction : odataidentifier;
+
+entityfunctionimport       : odataidentifier;
+entitycolfunctionimport    : odataidentifier;
+complexfunctionimport      : odataidentifier;
+complexcolfunctionimport   : odataidentifier;
+primitivefunctionimport    : odataidentifier;
+primitivecolfunctionimport : odataidentifier;
+
 
 // From ABNF section Literal Data Values
 
@@ -370,6 +562,9 @@ Booleanvalue : True | False;
 
 True  : T R U E ;
 False : F A L S E ;
+
+Qcharunescaped : Unreserved | Otherdelims | ':' | '@' | '/' | '?' | '$' | '\'' | '=';
+Otherdelims : '!' |                   '(' | ')' | '*' | '+' | ',' | ';';
 
 Unreserved : Alpha | Digit | '-' | '.' | '_' | '~';
 
