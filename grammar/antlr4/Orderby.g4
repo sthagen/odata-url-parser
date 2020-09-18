@@ -1,9 +1,11 @@
 grammar Orderby;
+// Note: not yet resolving all symbols and unchecked priorities for lexer rules - wip
 
 orderby  : '$'? Orderby '=' orderbyitem ( ',' | orderbyitem )*;
 
 orderbyitem : commonexpr [ RWS ( "asc" / "desc" ) ];
 
+// From ABNF section Expressions
 commonexpr : ( primitiveliteral
              | arrayorobject
              | rootexpr
@@ -242,6 +244,54 @@ notexpr : Not RWS boolcommonexpr;
 isofexpr : Isof OPEN BWS ( commonexpr BWS COMMA BWS )? optionallyqualifiedtypename BWS CLOSE;
 castexpr : Cast OPEN BWS ( commonexpr BWS COMMA BWS )? optionallyqualifiedtypename BWS CLOSE;
 
+
+// From ABNF section Names and identifiers
+
+// From ABNF section Literal Data Values
+
+// in URLs
+primitiveliteral : 'null'                     // plain values up to int64value
+                 | Booleanvalue
+                 | guidvalue
+                 | datetimeoffsetvalueinurl
+                 | datevalue
+                 | timeofdayvalueinurl
+                 | decimalvalue
+                 | doublevalue
+                 | singlevalue
+                 | sbytevalue
+                 | bytevalue
+                 | int16value
+                 | int32value
+                 | int64value
+                 | string                     // single-quoted
+                 | duration
+                 | enum
+                 | binary                     // all others are quoted and prefixed
+                 | geographycollection
+                 | geographylinestring
+                 | geographymultilinestring
+                 | geographymultipoint
+                 | geographymultipolygon
+                 | geographypoint
+                 | geographypolygon
+                 | geometrycollection
+                 | geometrylinestring
+                 | geometrymultilinestring
+                 | geometrymultipoint
+                 | geometrymultipolygon
+                 | geometrypoint
+                 | geometrypolygon
+                 ;
+
+guidvalue : Hexdigit8 '-' Hexdigit4 '-' Hexdigit4 '-' Hexdigit4 '-' Hexdigit12;
+
+// Lexer layer
+
+Hexdigit12 : Hexdigit8 Hexdigit4;
+Hexdigit8 : Hexdigit4 Hexdigit4;
+Hexdigit4 : Hexdigit Hexdigit Hexdigit Hexdigit;
+
 Any : A N Y ;
 All : A L L ;
 
@@ -316,9 +366,15 @@ Cast : C A S T ;
 
 Orderby : O R D E R B Y;
 
+Booleanvalue : True | False;
+
+True  : T R U E ;
+False : F A L S E ;
+
 Unreserved : Alpha | Digit | '-' | '.' | '_' | '~';
 
 Alpha : A | B | C | D | E | F | G | H | I | J | K | L | M | N |O | P | Q | R | S | T | U | V | W | X |Y | Z;
+Hexdigit : Digit | A | B | C | D | E | F ;
 Digit : [0-9];
 
 fragment A : [aA];
