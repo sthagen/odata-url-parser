@@ -1,0 +1,17 @@
+name: odata_url_parser
+version: 2020.9.13
+description: >-
+  An experimental OData 4.01 URL parser.
+homepage: https://github.com/sthagen/odata-url-parser/
+documentation: https://github.com/sthagen/odata-url-parser/
+
+environment:
+  sdk: '>=2.6.0 <3.0.0'
+
+dependencies:
+  antlr4: ^4.8.0-dev.2
+  args: ^1.6.0
+
+dev_dependencies:
+  test: '>=1.15.3'
+
