@@ -1,0 +1,10 @@
+T__0=1
+T__1=2
+T__2=3
+Schemaversion=4
+Unreserved=5
+Alpha=6
+Digit=7
+'$'=1
+'='=2
+'*'=3
