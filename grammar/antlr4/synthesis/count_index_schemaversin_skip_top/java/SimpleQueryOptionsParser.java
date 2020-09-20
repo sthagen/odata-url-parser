@@ -16,9 +16,9 @@ public class SimpleQueryOptionsParser extends Parser {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		UNRESERVED=1, BOOLEANVALUE=2, COUNT=3, INDEX=4, SCHEMAVERSION=5, SKIP_=6, 
-		TOP=7, TRUE=8, FALSE=9, SIGN=10, DASH=11, DOLLAR=12, EQ=13, STAR=14, AMPERSAND=15, 
-		ALPHA=16, DIGIT=17;
+		DIGIT=1, UNRESERVED=2, BOOLEANVALUE=3, COUNT=4, INDEX=5, SCHEMAVERSION=6, 
+		SKIP_=7, TOP=8, TRUE=9, FALSE=10, SIGN=11, DASH=12, DOLLAR=13, EQ=14, 
+		STAR=15, AMPERSAND=16, ALPHA=17;
 	public static final int
 		RULE_queryoptions = 0, RULE_queryoption = 1, RULE_inlinecount = 2, RULE_index_ = 3, 
 		RULE_schemaversion = 4, RULE_skip = 5, RULE_top = 6;
@@ -32,16 +32,16 @@ public class SimpleQueryOptionsParser extends Parser {
 
 	private static String[] makeLiteralNames() {
 		return new String[] {
-			null, null, null, null, null, null, null, null, null, null, null, "'-'", 
-			"'$'", "'='", "'*'", "'&'"
+			null, null, null, null, null, null, null, null, null, null, null, null, 
+			"'-'", "'$'", "'='", "'*'", "'&'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
-			null, "UNRESERVED", "BOOLEANVALUE", "COUNT", "INDEX", "SCHEMAVERSION", 
+			null, "DIGIT", "UNRESERVED", "BOOLEANVALUE", "COUNT", "INDEX", "SCHEMAVERSION", 
 			"SKIP_", "TOP", "TRUE", "FALSE", "SIGN", "DASH", "DOLLAR", "EQ", "STAR", 
-			"AMPERSAND", "ALPHA", "DIGIT"
+			"AMPERSAND", "ALPHA"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -615,21 +615,21 @@ public class SimpleQueryOptionsParser extends Parser {
 		"\7\3\7\3\7\6\7G\n\7\r\7\16\7H\3\b\5\bL\n\b\3\b\3\b\3\b\6\bQ\n\b\r\b\16"+
 		"\bR\3\b\2\2\t\2\4\6\b\n\f\16\2\2\2]\2\20\3\2\2\2\4\35\3\2\2\2\6 \3\2\2"+
 		"\2\b\'\3\2\2\2\n\64\3\2\2\2\fA\3\2\2\2\16K\3\2\2\2\20\25\5\4\3\2\21\22"+
-		"\7\21\2\2\22\24\5\4\3\2\23\21\3\2\2\2\24\27\3\2\2\2\25\23\3\2\2\2\25\26"+
+		"\7\22\2\2\22\24\5\4\3\2\23\21\3\2\2\2\24\27\3\2\2\2\25\23\3\2\2\2\25\26"+
 		"\3\2\2\2\26\3\3\2\2\2\27\25\3\2\2\2\30\36\5\6\4\2\31\36\5\b\5\2\32\36"+
 		"\5\n\6\2\33\36\5\f\7\2\34\36\5\16\b\2\35\30\3\2\2\2\35\31\3\2\2\2\35\32"+
-		"\3\2\2\2\35\33\3\2\2\2\35\34\3\2\2\2\36\5\3\2\2\2\37!\7\16\2\2 \37\3\2"+
-		"\2\2 !\3\2\2\2!\"\3\2\2\2\"#\7\5\2\2#$\7\17\2\2$%\7\4\2\2%\7\3\2\2\2&"+
-		"(\7\16\2\2\'&\3\2\2\2\'(\3\2\2\2()\3\2\2\2)*\7\6\2\2*,\7\17\2\2+-\7\r"+
-		"\2\2,+\3\2\2\2,-\3\2\2\2-/\3\2\2\2.\60\7\23\2\2/.\3\2\2\2\60\61\3\2\2"+
-		"\2\61/\3\2\2\2\61\62\3\2\2\2\62\t\3\2\2\2\63\65\7\16\2\2\64\63\3\2\2\2"+
-		"\64\65\3\2\2\2\65\66\3\2\2\2\66\67\7\7\2\2\67>\7\17\2\28?\7\20\2\29;\7"+
-		"\3\2\2:9\3\2\2\2;<\3\2\2\2<:\3\2\2\2<=\3\2\2\2=?\3\2\2\2>8\3\2\2\2>:\3"+
-		"\2\2\2?\13\3\2\2\2@B\7\16\2\2A@\3\2\2\2AB\3\2\2\2BC\3\2\2\2CD\7\b\2\2"+
-		"DF\7\17\2\2EG\7\23\2\2FE\3\2\2\2GH\3\2\2\2HF\3\2\2\2HI\3\2\2\2I\r\3\2"+
-		"\2\2JL\7\16\2\2KJ\3\2\2\2KL\3\2\2\2LM\3\2\2\2MN\7\t\2\2NP\7\17\2\2OQ\7"+
-		"\23\2\2PO\3\2\2\2QR\3\2\2\2RP\3\2\2\2RS\3\2\2\2S\17\3\2\2\2\17\25\35 "+
-		"\',\61\64<>AHKR";
+		"\3\2\2\2\35\33\3\2\2\2\35\34\3\2\2\2\36\5\3\2\2\2\37!\7\17\2\2 \37\3\2"+
+		"\2\2 !\3\2\2\2!\"\3\2\2\2\"#\7\6\2\2#$\7\20\2\2$%\7\5\2\2%\7\3\2\2\2&"+
+		"(\7\17\2\2\'&\3\2\2\2\'(\3\2\2\2()\3\2\2\2)*\7\7\2\2*,\7\20\2\2+-\7\16"+
+		"\2\2,+\3\2\2\2,-\3\2\2\2-/\3\2\2\2.\60\7\3\2\2/.\3\2\2\2\60\61\3\2\2\2"+
+		"\61/\3\2\2\2\61\62\3\2\2\2\62\t\3\2\2\2\63\65\7\17\2\2\64\63\3\2\2\2\64"+
+		"\65\3\2\2\2\65\66\3\2\2\2\66\67\7\b\2\2\67>\7\20\2\28?\7\21\2\29;\7\4"+
+		"\2\2:9\3\2\2\2;<\3\2\2\2<:\3\2\2\2<=\3\2\2\2=?\3\2\2\2>8\3\2\2\2>:\3\2"+
+		"\2\2?\13\3\2\2\2@B\7\17\2\2A@\3\2\2\2AB\3\2\2\2BC\3\2\2\2CD\7\t\2\2DF"+
+		"\7\20\2\2EG\7\3\2\2FE\3\2\2\2GH\3\2\2\2HF\3\2\2\2HI\3\2\2\2I\r\3\2\2\2"+
+		"JL\7\17\2\2KJ\3\2\2\2KL\3\2\2\2LM\3\2\2\2MN\7\n\2\2NP\7\20\2\2OQ\7\3\2"+
+		"\2PO\3\2\2\2QR\3\2\2\2RP\3\2\2\2RS\3\2\2\2S\17\3\2\2\2\17\25\35 \',\61"+
+		"\64<>AHKR";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {
