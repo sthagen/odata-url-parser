@@ -13,19 +13,26 @@ queryoptions :  queryoption ( AMPERSAND queryoption )*;
 
 queryoption  : inlinecount | index_ | schemaversion | skip | top;
 
-inlinecount   : DOLLAR? COUNT EQ BOOLEANVALUE;
-index_        : DOLLAR? INDEX EQ ( DASH )? DIGIT+;
-schemaversion : DOLLAR? SCHEMAVERSION EQ ( STAR | UNRESERVED+ );
-skip          : DOLLAR? SKIP_ EQ DIGIT+;
-top           : DOLLAR? TOP EQ DIGIT+;
+inlinecount   : DOLLAR? COUNT EQ booleanExpr;
+index_        : DOLLAR? INDEX EQ signedIntExpr;
+schemaversion : DOLLAR? SCHEMAVERSION EQ versionExpr;
+skip          : DOLLAR? SKIP_ EQ integralExpr;
+top           : DOLLAR? TOP EQ integralExpr;
+
+booleanExpr   : BOOLEANVALUE;
+integralExpr  : INTEGRAL_DIGITS;
+signedIntExpr : INTEGRAL_DIGITS | SIGNED_INTEGER;
+versionExpr   : STAR | UNRESERVED+;
 
 // lexer section  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-DIGIT: ZERO | NON_ZERO;
-DASH      : '-';
+INTEGRAL_DIGITS : DIGIT+;
+SIGNED_INTEGER : SIGN DIGIT+;
+
+UNRESERVED   : ALPHA | DIGIT | DASH | DOT | UNDER | TILDE;
+
 ALPHA : A | B | C | D | E | F | G | H | I | J | K | L | M | N | O | P | Q | R
           | S | T | U | V | W | X |Y | Z;
 
-UNRESERVED   : ALPHA | DIGIT | DASH | '.' | '_' | '~';
 BOOLEANVALUE : TRUE | FALSE;
 
 COUNT : C O U N T ;
@@ -36,13 +43,19 @@ TOP : T O P ;
 
 TRUE  : T R U E ;
 FALSE : F A L S E ;
+SIGN   : PLUS | DASH;
+DASH      : '-';
+PLUS      : '+';
 
-SIGN   : '+' | DASH;
-
+AMPERSAND : '&';
 DOLLAR    : '$';
+DOT       : '.';
 EQ        : '=';
 STAR      : '*';
-AMPERSAND : '&';
+TILDE     : '~';
+UNDER     : '_';
+
+DIGIT: ZERO | NON_ZERO;
 
 fragment NON_ZERO: [1-9];
 fragment ZERO: [0];
