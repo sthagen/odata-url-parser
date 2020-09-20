@@ -119,14 +119,10 @@ collectionpathexpr : count ( '(' expandcountoption ( ';' expandcountoption )* ')
 
 compute          : '$'? Compute '=' computeitem ( ',' computeitem )*;
 
-Compute : C O M P U T E ;
-
 computeitem      : commonexpr ( ' ' | '\u0009' )+ As ( ' ' | '\u0009' )+ computedproperty;
 computedproperty : odataidentifier;
 
 expand            : '$'? Expand '=' expanditem ( ',' expanditem )*;
-
-Expand : E X P A N D ;
 
 expanditem        : (DOLLAR (CAP_V | V) (CAP_A | A) (CAP_L | L) (CAP_U | U) (CAP_E | E))
                   | expandpath
@@ -182,14 +178,10 @@ skip  : '$'? Skip '=' INTEGER;
 
 top  : '$'? Top '=' INTEGER;
 
-Skip : S K I P;
-Top : T O P;
-
 inlinecount : '$'? Count '=' booleanvalue;
 
 // base64url encoding according to http://tools.ietf.org/html/rfc4648#section-5
 binary      : Binary '\'' binaryvalue '\'';
-Binary : B I N A R Y ;
 binaryvalue : base64char_04* ( base64b16  | base64b8 )?;
 base64b16   : base64char_02 ( 'A' | 'E' | 'I' | 'M' | 'Q' | 'U' | 'Y' | 'c' | 'g' | 'k' | 'o' | 's' | 'w' | ZERO | FOUR | EIGHT ) '='?;
 base64b8    : base64char ( CAP_A | CAP_Q | G | W ) ( (EQUALS EQUALS) )?;
@@ -201,8 +193,6 @@ base64char  : Alpha | Digit | DASH | UNDERSCORE;
 booleanvalue : True | False;
 
 select         : '$'? Select '=' selectitem ( ',' selectitem )*;
-
-Select : S E L E C T ;
 
 selectitem     : '*'
                | alloperationsinschema
@@ -241,8 +231,6 @@ selectoption   : selectoptionpc
                | compute | select | aliasandvalue;
 
 search     : '$'? Search '=' ( ' ' | '\u0009' )* ( searchexpr | searchexpr_incomplete );
-
-Search : S E A R C H ;
 
 searchexpr : ( searchparenexpr
              | searchnegateexpr
@@ -343,63 +331,63 @@ boolmethodcallexpr : endswithmethodcallexpr
                    | hassubsequencemethodcallexpr
                    ;
 
-concatmethodcallexpr         : Concat         OPEN BWS commonexpr BWS COMMA BWS commonexpr BWS CLOSE;
-containsmethodcallexpr       : Contains       OPEN BWS commonexpr BWS COMMA BWS commonexpr BWS CLOSE;
-endswithmethodcallexpr       : Endswith       OPEN BWS commonexpr BWS COMMA BWS commonexpr BWS CLOSE;
-indexofmethodcallexpr        : Indexof        OPEN BWS commonexpr BWS COMMA BWS commonexpr BWS CLOSE;
-lengthmethodcallexpr         : Length         OPEN BWS commonexpr BWS CLOSE;
-matchespatternmethodcallexpr : Matchespattern OPEN BWS commonexpr BWS COMMA BWS commonexpr BWS CLOSE;
-startswithmethodcallexpr     : Startswith     OPEN BWS commonexpr BWS COMMA BWS commonexpr BWS CLOSE;
-substringmethodcallexpr      : Substring      OPEN BWS commonexpr BWS COMMA BWS commonexpr BWS ( COMMA BWS commonexpr BWS )? CLOSE;
-tolowermethodcallexpr        : Tolower        OPEN BWS commonexpr BWS CLOSE;
-touppermethodcallexpr        : Toupper        OPEN BWS commonexpr BWS CLOSE;
-trimmethodcallexpr           : Trim           OPEN BWS commonexpr BWS CLOSE;
+concatmethodcallexpr         : Concat         '(' ( ' ' | '\u0009' )* commonexpr ( ' ' | '\u0009' )* ',' ( ' ' | '\u0009' )* commonexpr ( ' ' | '\u0009' )* ')';
+containsmethodcallexpr       : Contains       '(' ( ' ' | '\u0009' )* commonexpr ( ' ' | '\u0009' )* ',' ( ' ' | '\u0009' )* commonexpr ( ' ' | '\u0009' )* ')';
+endswithmethodcallexpr       : Endswith       '(' ( ' ' | '\u0009' )* commonexpr ( ' ' | '\u0009' )* ',' ( ' ' | '\u0009' )* commonexpr ( ' ' | '\u0009' )* ')';
+indexofmethodcallexpr        : Indexof        '(' ( ' ' | '\u0009' )* commonexpr ( ' ' | '\u0009' )* ',' ( ' ' | '\u0009' )* commonexpr ( ' ' | '\u0009' )* ')';
+lengthmethodcallexpr         : Length         '(' ( ' ' | '\u0009' )* commonexpr ( ' ' | '\u0009' )* ')';
+matchespatternmethodcallexpr : Matchespattern '(' ( ' ' | '\u0009' )* commonexpr ( ' ' | '\u0009' )* ',' ( ' ' | '\u0009' )* commonexpr ( ' ' | '\u0009' )* ')';
+startswithmethodcallexpr     : Startswith     '(' ( ' ' | '\u0009' )* commonexpr ( ' ' | '\u0009' )* ',' ( ' ' | '\u0009' )* commonexpr ( ' ' | '\u0009' )* ')';
+substringmethodcallexpr      : Substring      '(' ( ' ' | '\u0009' )* commonexpr ( ' ' | '\u0009' )* ',' ( ' ' | '\u0009' )* commonexpr ( ' ' | '\u0009' )* ( ',' ( ' ' | '\u0009' )* commonexpr ( ' ' | '\u0009' )* )? ')';
+tolowermethodcallexpr        : Tolower        '(' ( ' ' | '\u0009' )* commonexpr ( ' ' | '\u0009' )* ')';
+touppermethodcallexpr        : Toupper        '(' ( ' ' | '\u0009' )* commonexpr ( ' ' | '\u0009' )* ')';
+trimmethodcallexpr           : Trim           '(' ( ' ' | '\u0009' )* commonexpr ( ' ' | '\u0009' )* ')';
 
-yearmethodcallexpr               : Year               OPEN BWS commonexpr BWS CLOSE;
-monthmethodcallexpr              : Month              OPEN BWS commonexpr BWS CLOSE;
-daymethodcallexpr                : Day                OPEN BWS commonexpr BWS CLOSE;
-hourmethodcallexpr               : Hour               OPEN BWS commonexpr BWS CLOSE;
-minutemethodcallexpr             : Minute             OPEN BWS commonexpr BWS CLOSE;
-secondmethodcallexpr             : Second             OPEN BWS commonexpr BWS CLOSE;
-fractionalsecondsmethodcallexpr  : Fractionalseconds  OPEN BWS commonexpr BWS CLOSE;
-totalsecondsmethodcallexpr       : Totalseconds       OPEN BWS commonexpr BWS CLOSE;
-datemethodcallexpr               : Date               OPEN BWS commonexpr BWS CLOSE;
-timemethodcallexpr               : Time               OPEN BWS commonexpr BWS CLOSE;
-totaloffsetminutesmethodcallexpr : Totaloffsetminutes OPEN BWS commonexpr BWS CLOSE;
+yearmethodcallexpr               : Year               '(' ( ' ' | '\u0009' )* commonexpr ( ' ' | '\u0009' )* ')';
+monthmethodcallexpr              : Month              '(' ( ' ' | '\u0009' )* commonexpr ( ' ' | '\u0009' )* ')';
+daymethodcallexpr                : Day                '(' ( ' ' | '\u0009' )* commonexpr ( ' ' | '\u0009' )* ')';
+hourmethodcallexpr               : Hour               '(' ( ' ' | '\u0009' )* commonexpr ( ' ' | '\u0009' )* ')';
+minutemethodcallexpr             : Minute             '(' ( ' ' | '\u0009' )* commonexpr ( ' ' | '\u0009' )* ')';
+secondmethodcallexpr             : Second             '(' ( ' ' | '\u0009' )* commonexpr ( ' ' | '\u0009' )* ')';
+fractionalsecondsmethodcallexpr  : Fractionalseconds  '(' ( ' ' | '\u0009' )* commonexpr ( ' ' | '\u0009' )* ')';
+totalsecondsmethodcallexpr       : Totalseconds       '(' ( ' ' | '\u0009' )* commonexpr ( ' ' | '\u0009' )* ')';
+datemethodcallexpr               : Date               '(' ( ' ' | '\u0009' )* commonexpr ( ' ' | '\u0009' )* ')';
+timemethodcallexpr               : Time               '(' ( ' ' | '\u0009' )* commonexpr ( ' ' | '\u0009' )* ')';
+totaloffsetminutesmethodcallexpr : Totaloffsetminutes '(' ( ' ' | '\u0009' )* commonexpr ( ' ' | '\u0009' )* ')';
 
-mindatetimemethodcallexpr : Mindatetime OPEN BWS CLOSE;
-maxdatetimemethodcallexpr : Maxdatetime OPEN BWS CLOSE;
-nowmethodcallexpr         : Now         OPEN BWS CLOSE;
+mindatetimemethodcallexpr : Mindatetime '(' ( ' ' | '\u0009' )* ')';
+maxdatetimemethodcallexpr : Maxdatetime '(' ( ' ' | '\u0009' )* ')';
+nowmethodcallexpr         : Now         '(' ( ' ' | '\u0009' )* ')';
 
-roundmethodcallexpr   : Round   OPEN BWS commonexpr BWS CLOSE;
-floormethodcallexpr   : Floor   OPEN BWS commonexpr BWS CLOSE;
-ceilingmethodcallexpr : Ceiling OPEN BWS commonexpr BWS CLOSE;
+roundmethodcallexpr   : Round   '(' ( ' ' | '\u0009' )* commonexpr ( ' ' | '\u0009' )* ')';
+floormethodcallexpr   : Floor   '(' ( ' ' | '\u0009' )* commonexpr ( ' ' | '\u0009' )* ')';
+ceilingmethodcallexpr : Ceiling '(' ( ' ' | '\u0009' )* commonexpr ( ' ' | '\u0009' )* ')';
 
-distancemethodcallexpr   : Geodotdistance   OPEN BWS commonexpr BWS COMMA BWS commonexpr BWS CLOSE;
-geolengthmethodcallexpr  : Geodotlength     OPEN BWS commonexpr BWS CLOSE;
-intersectsmethodcallexpr : Geodotintersects OPEN BWS commonexpr BWS COMMA BWS commonexpr BWS CLOSE;
+distancemethodcallexpr   : Geodotdistance   '(' ( ' ' | '\u0009' )* commonexpr ( ' ' | '\u0009' )* ',' ( ' ' | '\u0009' )* commonexpr ( ' ' | '\u0009' )* ')';
+geolengthmethodcallexpr  : Geodotlength     '(' ( ' ' | '\u0009' )* commonexpr ( ' ' | '\u0009' )* ')';
+intersectsmethodcallexpr : Geodotintersects '(' ( ' ' | '\u0009' )* commonexpr ( ' ' | '\u0009' )* ',' ( ' ' | '\u0009' )* commonexpr ( ' ' | '\u0009' )* ')';
 
-hassubsetmethodcallexpr      : Hassubset      OPEN BWS commonexpr BWS COMMA BWS commonexpr BWS CLOSE;
-hassubsequencemethodcallexpr : Hassubsequence OPEN BWS commonexpr BWS COMMA BWS commonexpr BWS CLOSE;
+hassubsetmethodcallexpr      : Hassubset      '(' ( ' ' | '\u0009' )* commonexpr ( ' ' | '\u0009' )* ',' ( ' ' | '\u0009' )* commonexpr ( ' ' | '\u0009' )* ')';
+hassubsequencemethodcallexpr : Hassubsequence '(' ( ' ' | '\u0009' )* commonexpr ( ' ' | '\u0009' )* ',' ( ' ' | '\u0009' )* commonexpr ( ' ' | '\u0009' )* ')';
 
-casemethodcallexpr : Case OPEN BWS boolcommonexpr BWS COLON BWS commonexpr BWS
-                        ( COMMA BWS boolcommonexpr BWS COLON BWS commonexpr BWS )* CLOSE;
+casemethodcallexpr : Case '(' ( ' ' | '\u0009' )* boolcommonexpr ( ' ' | '\u0009' )* ':' ( ' ' | '\u0009' )* commonexpr ( ' ' | '\u0009' )*
+                        ( ',' ( ' ' | '\u0009' )* boolcommonexpr ( ' ' | '\u0009' )* ':' ( ' ' | '\u0009' )* commonexpr ( ' ' | '\u0009' )* )* ')';
 
-parenexpr : OPEN BWS commonexpr BWS CLOSE;
-listexpr  : OPEN BWS primitiveliteral BWS ( COMMA BWS primitiveliteral BWS )* CLOSE;
+parenexpr : '(' ( ' ' | '\u0009' )* commonexpr ( ' ' | '\u0009' )* ')';
+listexpr  : '(' ( ' ' | '\u0009' )* primitiveliteral ( ' ' | '\u0009' )* ( ',' ( ' ' | '\u0009' )* primitiveliteral ( ' ' | '\u0009' )* )* ')';
 
-andexpr : RWS And RWS boolcommonexpr;
-orexpr  : RWS Or  RWS boolcommonexpr;
+andexpr : ( ' ' | '\u0009' )+ And ( ' ' | '\u0009' )+ boolcommonexpr;
+orexpr  : ( ' ' | '\u0009' )+ Or  ( ' ' | '\u0009' )+ boolcommonexpr;
 
-eqexpr : RWS Eq RWS commonexpr;
-neexpr : RWS Ne RWS commonexpr;
-ltexpr : RWS Lt RWS commonexpr;
-leexpr : RWS Le RWS commonexpr;
-gtexpr : RWS Gt RWS commonexpr;
-geexpr : RWS Ge RWS commonexpr;
-inexpr : RWS In RWS ( listexpr | commonexpr );
+eqexpr : ( ' ' | '\u0009' )+ Eq ( ' ' | '\u0009' )+ commonexpr;
+neexpr : ( ' ' | '\u0009' )+ Ne ( ' ' | '\u0009' )+ commonexpr;
+ltexpr : ( ' ' | '\u0009' )+ Lt ( ' ' | '\u0009' )+ commonexpr;
+leexpr : ( ' ' | '\u0009' )+ Le ( ' ' | '\u0009' )+ commonexpr;
+gtexpr : ( ' ' | '\u0009' )+ Gt ( ' ' | '\u0009' )+ commonexpr;
+geexpr : ( ' ' | '\u0009' )+ Ge ( ' ' | '\u0009' )+ commonexpr;
+inexpr : ( ' ' | '\u0009' )+ In ( ' ' | '\u0009' )+ ( listexpr | commonexpr );
 
-hasexpr : RWS Has RWS enum_1;
+hasexpr : ( ' ' | '\u0009' )+ Has ( ' ' | '\u0009' )+ enum_1;
 
 enum_1            : ( qualifiedenumtypename )? '\'' enumvalue '\'';
 enumvalue       : singleenumvalue ( ',' singleenumvalue )*;
@@ -785,18 +773,21 @@ geometrypolygon         : geometryprefix '\'' fullpolygonliteral         '\'';
 geographyprefix : Geography ;
 geometryprefix  : Geometry ;
 
-Geography : G E O G R A P H Y ;
-Geometry: G E O M E T R Y ;
-
-
-
-
-
 // Lexer layer
 
 Hexdigit12 : Hexdigit8 Hexdigit4;
 Hexdigit8 : Hexdigit4 Hexdigit4;
 Hexdigit4 : Hexdigit Hexdigit Hexdigit Hexdigit;
+
+Compute : C O M P U T E ;
+Expand : E X P A N D ;
+Skip : S K I P;
+Top : T O P;
+Binary : B I N A R Y ;
+Select : S E L E C T ;
+Search : S E A R C H ;
+Geography : G E O G R A P H Y ;
+Geometry: G E O M E T R Y ;
 
 Any : A N Y ;
 All : A L L ;
