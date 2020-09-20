@@ -20,6 +20,11 @@ skip          : DOLLAR? SKIP_ EQ DIGIT+;
 top           : DOLLAR? TOP EQ DIGIT+;
 
 // lexer section  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+DIGIT: ZERO | NON_ZERO;
+DASH      : '-';
+ALPHA : A | B | C | D | E | F | G | H | I | J | K | L | M | N | O | P | Q | R
+          | S | T | U | V | W | X |Y | Z;
+
 UNRESERVED   : ALPHA | DIGIT | DASH | '.' | '_' | '~';
 BOOLEANVALUE : TRUE | FALSE;
 
@@ -34,15 +39,10 @@ FALSE : F A L S E ;
 
 SIGN   : '+' | DASH;
 
-DASH      : '-';
 DOLLAR    : '$';
 EQ        : '=';
 STAR      : '*';
 AMPERSAND : '&';
-
-ALPHA : A | B | C | D | E | F | G | H | I | J | K | L | M | N | O | P | Q | R
-          | S | T | U | V | W | X |Y | Z;
-DIGIT: ZERO | NON_ZERO;
 
 fragment NON_ZERO: [1-9];
 fragment ZERO: [0];
