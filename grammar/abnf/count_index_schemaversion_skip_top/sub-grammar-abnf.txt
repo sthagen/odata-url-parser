@@ -1,0 +1,20 @@
+; queryOptions for (inline)count, index, schemaversion, skip, and top
+; parser grammar
+queryOptions = queryOption *( "&" queryOption )
+
+queryOption  = inlinecount / index / schemaversion / skip / top
+
+inlinecount   = ( "$count" / "count" ) EQ booleanValue
+index         = ( "$index" / "index" ) EQ [ "-" ] 1*DIGIT
+schemaversion = ( "$schemaversion" / "schemaversion" ) EQ ( STAR / 1*unreserved )
+skip          = ( "$skip" / "skip" ) EQ 1*DIGIT
+top           = ( "$top"  / "top"  ) EQ 1*DIGIT
+
+; lexer grammar
+booleanValue = "true" / "false"
+unreserved    = ALPHA / DIGIT / "-" / "." / "_" / "~"
+ALPHA  = %x41-5A / %x61-7A
+SIGN   = "+" / "-"
+DIGIT  = %x30-39
+EQ     = "="
+STAR   = "*"
