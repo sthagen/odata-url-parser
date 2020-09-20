@@ -912,9 +912,8 @@ Identifiercharacter127      : Idch
 
 Idch         : Identifierleadingcharacter | Digit; // plus Unicode characters from the categories L, Nl, Nd, Mn, Mc, Pc, or Cf
 Identifierleadingcharacter  : Alpha | '_';         // plus Unicode characters from the categories L or Nl
-Pchar         : Unreserved | Subdelimins | ':' | '@';
 
-Unreserved : Alpha | Digit | '-' | '.' | '_' | '~';
+Unreserved : Identifierleadingcharacter | Digit | '-' | '.' | '~';
 
 
 Qchar_no_amp_eq_at_dollar : Unreserved |  Otherdelims | ':' |       '/' | '?' |       '\'';
@@ -923,9 +922,10 @@ Qchar_no_amp              : Unreserved |  Otherdelims | ':' | '@' | '/' | '?' | 
 Qchar_no_amp_squote       : Unreserved |  Otherdelims | ':' | '@' | '/' | '?' | '$' |       '=';
 Qchar_no_amp_dquote       : Unreserved |  Otherdelims | ':' | '@' | '/' | '?' | '$' | '\'' | '=';
 
-Qcharunescaped : Unreserved | Otherdelims | ':' | '@' | '/' | '?' | '$' | '\'' | '=';
+Qcharunescaped            : Unreserved | Otherdelims | ':' | '@' | '/' | '?' | '$' | '\'' | '=';
 Subdelimins     :       '$' | '&' | '\'' |                                     '=' | Otherdelims;
 Otherdelims : '!' |                   '(' | ')' | '*' | '+' | ',' | ';';
+Pchar         : Unreserved | Subdelimins | ':' | '@';
 
 Digit_16 : Digit_08 Digit_08 ;
 Digit_08 : Digit_04 Digit_04 ;
