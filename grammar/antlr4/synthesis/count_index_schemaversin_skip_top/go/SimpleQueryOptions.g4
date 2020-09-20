@@ -13,11 +13,11 @@ queryoptions :  queryoption ( AMPERSAND queryoption )*;
 
 queryoption  : inlinecount | index_ | schemaversion | skip | top;
 
-inlinecount   : DOLLAR COUNT EQ BOOLEANVALUE;
-index_        : DOLLAR INDEX EQ ( DASH )? DIGIT+;
-schemaversion : DOLLAR SCHEMAVERSION EQ ( STAR | UNRESERVED+ );
-skip          : DOLLAR SKIP_ EQ DIGIT+;
-top           : DOLLAR TOP EQ DIGIT+;
+inlinecount   : DOLLAR? COUNT EQ BOOLEANVALUE;
+index_        : DOLLAR? INDEX EQ ( DASH )? DIGIT+;
+schemaversion : DOLLAR? SCHEMAVERSION EQ ( STAR | UNRESERVED+ );
+skip          : DOLLAR? SKIP_ EQ DIGIT+;
+top           : DOLLAR? TOP EQ DIGIT+;
 
 // lexer section  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 UNRESERVED   : ALPHA | DIGIT | DASH | '.' | '_' | '~';
