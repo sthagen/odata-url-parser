@@ -76,4 +76,44 @@ public interface SimpleQueryOptionsListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitTop(SimpleQueryOptionsParser.TopContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link SimpleQueryOptionsParser#booleanExpr}.
+	 * @param ctx the parse tree
+	 */
+	void enterBooleanExpr(SimpleQueryOptionsParser.BooleanExprContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SimpleQueryOptionsParser#booleanExpr}.
+	 * @param ctx the parse tree
+	 */
+	void exitBooleanExpr(SimpleQueryOptionsParser.BooleanExprContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link SimpleQueryOptionsParser#integralExpr}.
+	 * @param ctx the parse tree
+	 */
+	void enterIntegralExpr(SimpleQueryOptionsParser.IntegralExprContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SimpleQueryOptionsParser#integralExpr}.
+	 * @param ctx the parse tree
+	 */
+	void exitIntegralExpr(SimpleQueryOptionsParser.IntegralExprContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link SimpleQueryOptionsParser#signedIntExpr}.
+	 * @param ctx the parse tree
+	 */
+	void enterSignedIntExpr(SimpleQueryOptionsParser.SignedIntExprContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SimpleQueryOptionsParser#signedIntExpr}.
+	 * @param ctx the parse tree
+	 */
+	void exitSignedIntExpr(SimpleQueryOptionsParser.SignedIntExprContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link SimpleQueryOptionsParser#versionExpr}.
+	 * @param ctx the parse tree
+	 */
+	void enterVersionExpr(SimpleQueryOptionsParser.VersionExprContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SimpleQueryOptionsParser#versionExpr}.
+	 * @param ctx the parse tree
+	 */
+	void exitVersionExpr(SimpleQueryOptionsParser.VersionExprContext ctx);
 }

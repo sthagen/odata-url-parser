@@ -94,6 +94,54 @@ public class SimpleQueryOptionsBaseListener implements SimpleQueryOptionsListene
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitTop(SimpleQueryOptionsParser.TopContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterBooleanExpr(SimpleQueryOptionsParser.BooleanExprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitBooleanExpr(SimpleQueryOptionsParser.BooleanExprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterIntegralExpr(SimpleQueryOptionsParser.IntegralExprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitIntegralExpr(SimpleQueryOptionsParser.IntegralExprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterSignedIntExpr(SimpleQueryOptionsParser.SignedIntExprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSignedIntExpr(SimpleQueryOptionsParser.SignedIntExprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterVersionExpr(SimpleQueryOptionsParser.VersionExprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitVersionExpr(SimpleQueryOptionsParser.VersionExprContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

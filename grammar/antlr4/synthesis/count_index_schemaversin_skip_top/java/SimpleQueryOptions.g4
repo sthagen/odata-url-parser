@@ -19,21 +19,19 @@ schemaversion : DOLLAR? SCHEMAVERSION EQ versionExpr;
 skip          : DOLLAR? SKIP_ EQ integralExpr;
 top           : DOLLAR? TOP EQ integralExpr;
 
-booleanExpr   : BOOLEANVALUE;
+booleanExpr   : TRUE | FALSE;
 integralExpr  : INTEGRAL_DIGITS;
 signedIntExpr : INTEGRAL_DIGITS | SIGNED_INTEGER;
 versionExpr   : STAR | UNRESERVED+;
 
 // lexer section  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+SIGNED_INTEGER : (PLUS | DASH) DIGIT+;
 INTEGRAL_DIGITS : DIGIT+;
-SIGNED_INTEGER : SIGN DIGIT+;
 
 UNRESERVED   : ALPHA | DIGIT | DASH | DOT | UNDER | TILDE;
 
 ALPHA : A | B | C | D | E | F | G | H | I | J | K | L | M | N | O | P | Q | R
           | S | T | U | V | W | X |Y | Z;
-
-BOOLEANVALUE : TRUE | FALSE;
 
 COUNT : C O U N T ;
 INDEX : I N D E X ;
@@ -43,14 +41,13 @@ TOP : T O P ;
 
 TRUE  : T R U E ;
 FALSE : F A L S E ;
-SIGN   : PLUS | DASH;
-DASH      : '-';
-PLUS      : '+';
 
 AMPERSAND : '&';
+DASH      : '-';
 DOLLAR    : '$';
 DOT       : '.';
 EQ        : '=';
+PLUS      : '+';
 STAR      : '*';
 TILDE     : '~';
 UNDER     : '_';
