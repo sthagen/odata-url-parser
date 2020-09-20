@@ -22,9 +22,11 @@ queryoptions : queryoption ( AMPERSAND queryoption )*;
 // 1. Resource Path
 //------------------------------------------------------------------------------
 
-collectionnavigation : ( SLASH optionallyqualifiedentitytypename )? ( collectionnavpath )?;
-collectionnavpath    : (keypredicate ( singlenavigation )?)
-                     | (filterinpath ( collectionnavigation )?)
+collectionnavigation : collectionnavpath
+                     | '/' optionallyqualifiedentitytypename collectionnavpath?
+                     ;
+collectionnavpath    : (keypredicate singlenavigation )
+                     | (filterinpath collectionnavigation )
                      | (each ( boundoperation )?)
                      | boundoperation
                      | count
@@ -40,34 +42,42 @@ keypropertyalias : odataidentifier;
 keypathsegments  : ( SLASH keypathliteral )+;
 keypathliteral   : pchar*;
 
-singlenavigation : ( SLASH optionallyqualifiedentitytypename )?
-                   ( (SLASH propertypath)
-                   | boundoperation
-                   | ref_1
-                   | value  // request the media resource of a media entity
-                   | querysegment
-                   )?;
+singlenavigation : singlenavpath
+                  | SLASH optionallyqualifiedentitytypename singlenavpath?
+                  ;
+
+ singlenavpath : SLASH propertypath
+               | boundoperation
+               | ref_1
+               | value  // request the media resource of a media entity
+               | querysegment
+               ;
 
 propertypath : (entitycolnavigationproperty ( collectionnavigation )?)
              | (entitynavigationproperty    ( singlenavigation )?)
              | (complexcolproperty          ( complexcolpath )?)
              | (complexproperty             ( complexpath )?)
-             | (primitivecolproperty        ( primitivecolpath )?)
+             | (primitivecolproperty        ( collectionpath )?)
              | (primitiveproperty           ( primitivepath )?)
-             | (streamproperty              ( boundoperation )?);
+             | (streamproperty              ( boundoperation )?)
+             ;
 
-primitivecolpath : count | boundoperation | ordinalindex | querysegment;
+collectionpath : count | boundoperation | ordinalindex | querysegment;
 
 primitivepath  : value | boundoperation | querysegment;
 
-complexcolpath : ordinalindex
-               | (( SLASH optionallyqualifiedcomplextypename )? ( count | boundoperation | querysegment )?);
+complexcolpath : collectionpath
+                | '/' optionallyqualifiedcomplextypename collectionpath?
+                ;
 
-complexpath    : ( SLASH optionallyqualifiedcomplextypename )?
-                 ( (SLASH propertypath)
-                 | boundoperation
-                 | querysegment
-                 )?;
+complexpath : complexnavpath
+             | '/' optionallyqualifiedcomplextypename complexnavpath?
+             ;
+
+ complexnavpath : '/' propertypath
+                | boundoperation
+                | querysegment
+                ;
 
 filterinpath : (SLASH DOLLAR F I L T E R) open boolcommonexpr close;
 
@@ -88,7 +98,7 @@ boundoperation : SLASH ( boundactioncall
                      | (boundentityfunctioncall       ( singlenavigation )?)
                      | (boundcomplexcolfunctioncall   ( complexcolpath )?)
                      | (boundcomplexfunctioncall      ( complexpath )?)
-                     | (boundprimitivecolfunctioncall ( primitivecolpath )?)
+                     | (boundprimitivecolfunctioncall ( collectionpath )?)
                      | (boundprimitivefunctioncall    ( primitivepath )?)
                      | (boundfunctioncallnoparens     ( querysegment )?)
                      );
