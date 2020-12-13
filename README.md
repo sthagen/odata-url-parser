@@ -27,4 +27,4 @@ File source, stdin, and inline mode.
 
 All in memory and streaming mode.
 
-Note: The default branch (with special meaning for github and gitlab users) has the name default 😉
+Note: The default branch has the name default 
